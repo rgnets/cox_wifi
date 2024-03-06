@@ -1,0 +1,20 @@
+<% if @effective_portal.try(:require_tos_inline?) %>
+  <% tos_id = "tos-#{SecureRandom.uuid}" %>
+  <% sui = defined?(alt) # StraightUp Internet has additional terms content. %>
+  <div class="form-check <%= sui ? "branded-su" : defined?(keep) ? "" : "branded-cox" %>" style="<%= "display: none" if sui %>">
+    <input id="<%= tos_id %>" type="checkbox" name="terms" value="terms" class="form-check-input" required />
+    <label class="form-check-label" for="<%= tos_id %>">
+      <%= _("By checking the box, you agree to #{sui ? alt[0] : "the " }<a href=\"#terms-modal\" class=\"text-primary\" data-bs-toggle=\"modal\">WiFi Terms of Service</a>#{alt[1] if sui}").html_safe %>
+    </label>
+  </div>
+<% end %>
+
+<script>
+ $('#<%= tos_id %>').on('change', function() {
+   if ($(this).is(':checked')) {
+    $('.btn-access:visible:eq(1)').removeClass('pending');
+   } else {
+    $('.btn-access:visible:eq(1)').addClass('pending');
+   }
+ });
+</script>
