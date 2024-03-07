@@ -84,7 +84,7 @@
         <% # Default to Straight Up banner on quick_purchase page. %>
         <% straightup = current_page?(controller: 'cox_wifi', action: 'quick_purchase') %>
         <div id="banner" class="w-100 py-4<%= " yellow" if straightup %>"></div>
-        <div class="container">
+        <div class="container ps-4">
           <div class="row">
             <%= portal_inline_svg("Cox-Hotspots-logo.svg", class: "col-9 col-md-7 py-4 py-lg-5 col-lg-5 my-auto d-flex logo-branded back-to-central") unless straightup %>
             <div class="<%= straightup ? "d-flex " : "d-none " %>logo-branded my-5">

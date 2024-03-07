@@ -123,9 +123,9 @@
 
 <div class="row justify-content-center row-cols-1 access" style="display: none">
   <% login_forms.each do |lf| %>
-    <div class="col p-3 access-card" style="display: none">
+    <div class="col p-3 pt-0 access-card" style="display: none">
       <%= lf[:headers].html_safe if lf[:headers] %>
-      <%= card(class: "login-card h-100 p-2 md-3 pd-lg-4 #{portal_card_classes}") do %>
+      <%= card(class: "login-card p-2 pt-0 md-3 pd-lg-4 #{portal_card_classes}") do %>
         <%= card_body do %>
           <%= lf[:form] %>
         <% end %>
