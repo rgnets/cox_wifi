@@ -76,6 +76,9 @@
     # Account Login
     if Account.exists?
       login_forms << {
+        headers: '<div class="text-center"><p class="subscriber-heading">Cox Internet Subscriber</p>
+          <p class="px-5" style="font-size: 1.25rem">Sign in if you\'re a Cox Internet subscriber or
+          <a href="#" class: "no-underline">learn more</a> about WiFi.</p></div>',
         form: render_portal_partial('login_form_account', locals: {create: usage_plan_exists, title: _('Log in') })
       }
     end
@@ -121,6 +124,7 @@
 <div class="row justify-content-center row-cols-1 access" style="display: none">
   <% login_forms.each do |lf| %>
     <div class="col p-3 access-card" style="display: none">
+      <%= lf[:headers].html_safe if lf[:headers] %>
       <%= card(class: "login-card h-100 p-2 md-3 pd-lg-4 #{portal_card_classes}") do %>
         <%= card_body do %>
           <%= lf[:form] %>
@@ -128,21 +132,4 @@
       <% end %>
     </div>
   <% end %>
-  <% # Insert separate template for account sign in. %>
-  <div class="col p-3 pt-0 access-card" style="display: none">
-    <div class="text-center">
-      <p class="subscriber-heading">Cox Internet Subscriber</p>
-      <p class="px-5" style="font-size: 1.25rem">
-        Sign in if you're a Cox Internet subscriber or
-        <%= link_to("learn more", "#", class: "no-underline") %>
-        about WiFi.
-      </p>
-    </div>
-    <%= card(class: "login-card p-2 md-3 pd-lg-4 #{portal_card_classes}") do %>
-      <%= card_body do %>
-        <%= render_portal_partial('login_form_account', locals: {hide_title: true}) %>
-      <% end %>
-    <% end %>
-  </div>
-  <% # End account sign in. %>
 </div>
