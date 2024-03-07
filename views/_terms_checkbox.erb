@@ -1,10 +1,17 @@
 <% if @effective_portal.try(:require_tos_inline?) %>
   <% tos_id = "tos-#{SecureRandom.uuid}" %>
-  <% sui = defined?(alt) # StraightUp Internet has additional terms content. %>
-  <div class="form-check <%= sui ? "branded-su" : defined?(keep) ? "" : "branded-cox" %>" style="<%= "display: none" if sui %>">
+  <div class="form-check">
     <input id="<%= tos_id %>" type="checkbox" name="terms" value="terms" class="form-check-input" required />
+    <% sui = defined?(alt) # StraightUp Internet has additional terms content. %>
     <label class="form-check-label" for="<%= tos_id %>">
-      <%= _("By checking the box, you agree to #{sui ? alt[0] : "the " }<a href=\"#terms-modal\" class=\"text-primary\" data-bs-toggle=\"modal\">WiFi Terms of Service</a>#{alt[1] if sui}").html_safe %>
+      <span class="<%= "branded-cox" if sui %>" style="<%= "display: none" if sui %>">
+        <%= _('By checking the box, you agree to the <a href="#terms-modal" data-bs-toggle="modal">WiFi Terms of Service</a>').html_safe %>
+      </span>
+      <% if sui %>
+        <span class="branded-su" style="display: none">
+          <%= _('By checking the box, you agree to our <a href="#">Privacy Notice</a>, <a href="#terms-modal" data-bs-toggle="modal">WiFi Terms of Service</a>, and <a href="#">Acceptable Use Policy</a>').html_safe %>
+        </span>
+      <% end %>
     </label>
   </div>
 <% end %>

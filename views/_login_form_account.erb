@@ -5,14 +5,16 @@
 %>
 <%= bootstrap_form_tag(url: {action: :account_login}, id: 'account_login') do |f| %>
   <fieldset class="d-flex flex-column h-100">
+    <!--
     <div class="d-flex justify-content-between align-items-center">
       <legend class="<%= 'visually-hidden' if hide_title %>" style="width: auto;"><%= title %></legend>
-      <% if create %>
+      <%# if create %>
         <span>
-          <%= (_('or %{link}') % { link: link_to(_('Create an account'), action: :quick_purchase) }).html_safe %>
+          <%#= (_('or %{link}') % { link: link_to(_('Create an account'), action: :quick_purchase) }).html_safe %>
         </span>
-      <% end # if create %>
+      <%# end # if create %>
     </div>
+    -->
     <div class="row">
       <div class="col-12 col-md-5 col-lg-4 me-md-5">
         <%= f.text_field(:login, {value: params[:login], label: _('Cox user ID'), label_as_placeholder: false, class: "form-control bg-transparent", autocomplete: :username, autocorrect: :off, autocapitalize: :off}) %>
